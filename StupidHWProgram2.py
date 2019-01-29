@@ -5,26 +5,21 @@
 #
 # Jack Roten 23 Jan 19
 #
-#
+#----------------------------------------------------------------------
 
 
-sentence = input('Please write a sentce: ')
+def count_words_and_letters(sentence):
+    wordList = []
+    letterList = []
+    wordList.append(ii) for ii in wordList
+    wordCount = len(wordList)
+    print(wordCount)
+#    letterList.append(jj) for jj in wordlist
+#    letterCount = len(letterList)
 
-#for ii in range len(sentence):
+sentence = input('Please enter a sentence')
+pgrmOut = count_words_and_letters(sentence)
 
-words = sentence.split()
-print(words)
-print(len(words))
 
-for ii in words:
-    word = words[ii]
-    letters = 
-
-## Will count all individual letter in the words: Overkill for this assignment.
-#from collections import Counter
-#cnt = Counter()
-#for ii in words:
-#    for letters in set(ii):
-#        cnt[letters]+=1
-#print(cnt)
-
+    
+    
