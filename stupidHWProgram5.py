@@ -1,16 +1,13 @@
+#!/usr/bin/env python3
 #
+# StupidHWProgram5.py
 #
-# Add top bash line that is always use
-# This is pretty neat
+# 129L Homework Exercise 5
+# runs shell /bin/ls /etc command and writes the output to the screen
+# 
 #
-# I'm not sure what the assignment problem is but I should probably figure it
-# out
+# Jack Roten 29 Jan 19
+#-------------------------------------------------------
 
-a = 2
-b = 2
-c = a + b
-
-print(c)
-
-
-
+import os
+os.system('/bin/ls /etc')

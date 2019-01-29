@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 #
-# stupidHWProgram2.py
-#
-# Winter 2019 129L
 # Homework Exercise 3
 # Prompt user for sentence and remove dupilicated words and output sentence
 # with duplicate words removed
