@@ -76,3 +76,73 @@ for x in range(0,stringCount):
 print("Word Count is: ", stringCount)
 print("The number of characters in the sentence is: ", charCount)
 
+#--------------------------------------------------------------
+# Question 4
+# Write a program that output all integers between 100 and 400 (included) such that all of their digits are even.
+#--------------------------------------------------------------
+
+def evenDigit(number):
+	integer = str(number)
+	returnDigit = []
+# for each individual digit in the number
+	for digit in integer:
+# if its even %2 = 0
+		if int(digit) % 2 == 0:
+# if true, add it in the list
+			returnDigit.append(True)
+		else:
+# else, ignore it
+			returnDigit.append(False)
+	return returnDigit
+
+evenList = [i for i in range (100, 401) if all(evenDigit(i))]
+print(','.join([str(i) for i in evenList]))
+
+#--------------------------------------------------------------
+# Question 5
+# Write a program that output all integers between 100 and 400 (included) such that all of their digits are even.
+#--------------------------------------------------------------
+
+# Write a python program that runs the shell /bin/ls /etc command and writes the output of the
+# shell command would then be available to python for further processing.
+
+import os
+os.system('/bin/ls /etc')
+
+
+#--------------------------------------------------------------
+# Question 6
+# Write a program that asks for a number and return the prime factors of that number, with their relative powers. For example if the number was 4567956 it should return something like
+# 2 to the power 2
+# 3 to the power 1
+# 191 to the power 1
+# 1993 to the power 1
+#--------------------------------------------------------------
+
+from collections import Counter
+import math
+
+# function that will calculate the prime factors
+def thePrimeFact(n):
+	i = 2
+	numbList = []
+	while i * i <= n:
+		if n % i:
+			i += 1
+		else:
+			n //= i
+			numbList.append(i)
+	if n > 1:
+		numbList.append(n)
+	return numbList
+
+# function that will print out as it iterates through, adding the string "to the power between each prime factorization
+def printOut(m):
+	numbSoul = thePrimeFact(m)
+	counter = Counter(numbSoul)
+	for i,j in counter.items():
+		print(i, 'to the power ', j)
+
+numbae = int(input("Enter the number you wanna factor: "))
+printOut(numbae)
+#print('[%s]' % ', '.join(map(str, numbList)))
