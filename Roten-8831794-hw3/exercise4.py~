@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 #
 # exercise4.py
-# 
-# Color map of probability distribution function 
 #
 #
-# Jack Roten 06 Feb  19
-#-------------------------------------------------------
+#
+
+# Jack Roten 28 Jan 19
+#-------------------------------------------------------#!
 
 
 from mpl_toolkits.mplot3d import Axes3D
@@ -19,24 +19,18 @@ import numpy as np
 fig = plt.figure()
 ax = fig.gca(projection='3d')
 L = 100
-n_x = 4
-n_y = 4
-k_x = np.pi/L
-k_y = np.pi/L
-
-
 
 # Make data.
 X = np.arange(0, L, 0.25)
 Y = np.arange(0, L, 0.25)
 X, Y = np.meshgrid(X, Y)
-phi = np.sin(n_x*k_x*X)*np.sin(n_y*k_y*Y)
-pdf = phi**2
+phi = np.sin(2*(np.pi/L))*np.sin(5*(np.pi/L))
+
 # R = np.sqrt(X**2 + Y**2)
 #Z = np.sin(R)
 
 # Plot the surface.
-surf = ax.plot_surface(X, Y, pdf, cmap=cm.coolwarm,
+surf = ax.plot_surface(X, Y, phi, cmap=cm.coolwarm,
                        linewidth=0, antialiased=False)
 
 # Customize the z axis.
