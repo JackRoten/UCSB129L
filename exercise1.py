@@ -19,8 +19,8 @@ x = np.random.uniform(0,1,2*N)
 #the counter
 
 def findFactorial(aNum):
-    if aNum == 0:
-        return 1
+    if aNum == 1:
+        return aNum
     else:
         return (aNum * findFactorial(aNum-1))
     
