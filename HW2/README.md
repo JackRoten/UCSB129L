@@ -1,2 +1,2 @@
-# UCSB129L
-All code for UCSB 129L lab class.
+# HW2
+Programs for HW2
