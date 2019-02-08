@@ -75,7 +75,15 @@ def binomialDistFxn(theCount, N):
 
     #binomial distribution calculation
     finalCalculation = possibleCombos * fToThePow * oneMinusF
-    return finalCalculation
+
+    insideRoot = (estimatedF * (1 - estimatedF)) / N
+   
+    uncertaintyF = sqrt(insideRoot)
+
+
+    
+    
+    return (finalCalculation, uncertainty)
     
     
 
