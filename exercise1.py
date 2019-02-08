@@ -19,10 +19,11 @@ x = np.random.uniform(0,1,2*N)
 #the counter
 
 def findFactorial(aNum):
-    if aNum == 1:
-        return aNum
-    else:
-        return (aNum * findFactorial(aNum-1))
+    factorial = 1
+    while aNum > 1:
+        factorial = factorial * aNum
+        aNum = aNum - 1
+    return factorial
     
 
 
@@ -70,20 +71,20 @@ def binomialDistFxn(theCount, N):
     fToThePow = pow(estimatedF, theCount)
 
     #(1-f) to the power of (N-theCount)
-    oneMinusF = (1 - estimatedF, N - theCount)
+    oneMinusF = pow(1 - estimatedF, N - theCount)
 
 
     #binomial distribution calculation
-    finalCalculation = possibleCombos * fToThePow * oneMinusF
+    finalCalculation = (int(possibleCombos)) * (int(fToThePow)) * (int(oneMinusF))
 
     insideRoot = (estimatedF * (1 - estimatedF)) / N
    
-    uncertaintyF = sqrt(insideRoot)
+    uncertaintyF = math.sqrt(insideRoot)
 
 
     
     
-    return (finalCalculation, uncertainty)
+    return (finalCalculation, uncertaintyF)
     
     
 
