@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+
+#Question 3 what I did so far
+
+import re
+import csv
+
+
+# read and open file also ensuring that our file type will be reading in by adding the encoding value
+with open('./CensusTownAndCityPopulation.csv', encoding='utf-8-sig') as csvDataFile:
+    csvReader = csv.reader(csvDataFile)
+    for row in csvReader:
+           # eventually delete. this is just for debugging purpose that the file actually reads
+        print(row)
