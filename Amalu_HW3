@@ -5,33 +5,10 @@
 import re
 import csv
 
-# MAJORITY OF THIS ISN't PART OF THE CODE I just commented it out
 
-#open csv file and read the data
-#with codecs.open("CensusTownAndCityPopulation.csv", "r", encoding='utf-8') as f:
-#   censusList = f.read()
-
-#censusList = open("./CensusTownAndCityPopulation.csv", mode="r", encoding="utf-8-sig")
-#censusList.read()
-
-with open("./CensusTownAndCityPopulation.csv", mode="r", encoding="utf-8-sig") as f:
-    data=f.read()
-
-for (
-
-
-
-
-#print(censusList)
-
-
-#   data = f.readlines()
-#   print ("Read Lines: %s" (data))
-
-    #   sorted_data = sorted(data, key=lambda pop: pop.split()[1]))
-    #print(sorted_data)
-
-#print("censuslist", censusList)
-#array = [line.split(r"[\w']+") for line in censusList]
-
-#censusList = name.decode('./CensusTownAndCityPopulation.csv')
+# read and open file also ensuring that our file type will be reading in by adding the encoding value
+with open('./CensusTownAndCityPopulation.csv', encoding='utf-8-sig') as csvDataFile:
+    csvReader = csv.reader(csvDataFile)
+    for row in csvReader:
+           # eventually delete. this is just for debugging purpose that the file actually reads
+        print(row)
