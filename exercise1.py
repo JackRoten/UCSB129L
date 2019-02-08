@@ -22,7 +22,7 @@ def findFactorial(aNum):
     if aNum == 0:
         return 1
     else:
-        return aNum * findFactorial(n-1)
+        return (aNum * findFactorial(aNum-1))
     
 
 
@@ -30,7 +30,7 @@ def isInCircle(aList):
     counter = 0
     halfList = int(len(aList) / 2)
     for i in range(0, halfList):
-        x = aList[i] value of a into b,
+        x = aList[i]
         difX = x-0.5
         y = aList[i+1]
         radius = 1
@@ -45,7 +45,7 @@ def isInCircle(aList):
             inside = True
             counter += 1
 
-    return (counter, N)
+    return (counter)
 
 
 def binomialDistFxn(theCount, N):
@@ -67,7 +67,7 @@ def binomialDistFxn(theCount, N):
     #---------Use either estimated F or exactF???------------------
     
     #f to the power of theCount
-    fToThePow = pow(estimatedF, thecount)
+    fToThePow = pow(estimatedF, theCount)
 
     #(1-f) to the power of (N-theCount)
     oneMinusF = (1 - estimatedF, N - theCount)
@@ -98,7 +98,7 @@ print (a)
 #pass in the counter return value of a into b,
 #which uses the counter and number of pairs to compute
 #the value of binom dist fxn
-b = binomialDistFxn(a)
+b = binomialDistFxn(a, N)
 
 '''
 stuff i don't know i'll need 
