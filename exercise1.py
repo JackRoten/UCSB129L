@@ -75,39 +75,35 @@ def binomialDistFxn(theCount, N):
 
 
     #binomial distribution calculation
-    finalCalculation = (int(possibleCombos)) * (int(fToThePow)) * (int(oneMinusF))
+    finalCalculation = (float(possibleCombos)) * (float(fToThePow)) * (float(oneMinusF))
 
     insideRoot = (estimatedF * (1 - estimatedF)) / N
    
     uncertaintyF = math.sqrt(insideRoot)
 
+    piDiff = exactPi - estimatedPi
+    anotherPiDiff = piDiff / exactPi
+    percentDiffBtwnPis = anotherPiDiff * 100
 
+    reversePi = estimatedPi - exactPi
+    sigmaPi = 4 * uncertaintyF
+    thePull = reversePi / sigmaPi
+    print ("The pull is: ", thePull)
     
-    
-    return (finalCalculation, uncertaintyF)
+    return (finalCalculation, uncertaintyF, percentDiffBtwnPis)
     
     
 
 #How to make sure that n follows a binomial distribution?
 
-
 #call the function to take in a list and check if its
 #ordered pairs lie in the circle
 a = isInCircle(x)
-print (a)
+print ("The number of points inside the circle is: ", a)
 
 #pass in the counter return value of a into b,
 #which uses the counter and number of pairs to compute
 #the value of binom dist fxn
 b = binomialDistFxn(a, N)
+print(b)
 
-'''
-stuff i don't know i'll need 
--------------------------------------
-#plt.scatter(x,y)
-#plt.show
-   
-#count, bins, ignored = plt.hist(x, 15, normed = True)
-#plt.plot(bins, np.ones_like(bins), linewidth = 2, color = 'r')
-#plt.show()
-'''
