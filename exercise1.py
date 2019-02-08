@@ -6,6 +6,8 @@ import matplotlib
 import random
 import matplotlib.pyplot as plt
 
+exactPi = math.pi
+
 N = int(input("Enter the number of pairs: "))
 #x is a list
 x = np.random.uniform(0,1,2*N)
@@ -16,16 +18,23 @@ x = np.random.uniform(0,1,2*N)
 #in the circle. If the ordered pair does then increase
 #the counter
 
+def findFactorial(aNum):
+    if aNum == 0:
+        return 1
+    else:
+        return aNum * findFactorial(n-1)
+    
 
 
 def isInCircle(aList):
     counter = 0
     halfList = int(len(aList) / 2)
     for i in range(0, halfList):
-        x = aList[i]
+        x = aList[i] value of a into b,
+        difX = x-0.5
         y = aList[i+1]
         radius = 1
-        xSq = pow(x, 2)
+        xSq = pow(difX, 2)
         ySq = pow(y, 2)
         xSqPySq = xSq + ySq
         if xSqPySq > radius:
@@ -33,14 +42,41 @@ def isInCircle(aList):
         else:
             points = [x, y]
             print (points)
-            outside = True
+            inside = True
             counter += 1
 
     return (counter, N)
 
 
-def binomialDistFxn(theCount, ):
-    estF = theCount
+def binomialDistFxn(theCount, N):
+    estimatedF = theCount/N
+    exactF = exactPi / 4
+    estimatedPi = 4 * estimatedF
+    
+    #First find the factorials of theCount, N and their difference
+    theCountFactorial = findFactorial(theCount)
+    theNFactorial = findFactorial(N)
+    theDifference = theCount - N
+    theDifferenceFactorial = findFactorial(theDifference)
+    
+    #Use the factorial values with the Combination formula
+    possibleCombos = theCountFactorial / (theNFactorial * theDifferenceFactorial)
+
+
+
+    #---------Use either estimated F or exactF???------------------
+    
+    #f to the power of theCount
+    fToThePow = pow(estimatedF, thecount)
+
+    #(1-f) to the power of (N-theCount)
+    oneMinusF = (1 - estimatedF, N - theCount)
+
+
+    #binomial distribution calculation
+    finalCalculation = possibleCombos * fToThePow * oneMinusF
+    return finalCalculation
+    
     
 
 #How to make sure that n follows a binomial distribution?
@@ -55,11 +91,6 @@ print (a)
 #which uses the counter and number of pairs to compute
 #the value of binom dist fxn
 b = binomialDistFxn(a)
-
-
-
-
-
 
 '''
 stuff i don't know i'll need 
