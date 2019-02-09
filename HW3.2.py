@@ -8,16 +8,18 @@ def f(x):
     return x**2-x**3
 
 def fprime(x,h):
-    return (f(x+h)-f(x))/h
+    return (f(x+h)-f(x))/(float(h))
 
 def fprime2(x,h):
-    return (f(x+h)-f(x-h))/(2*h)
+    return (f(x+h)-f(x-h))/(float(2*h))
 
 for i in range(1,4):
     h = 1/(10**(3*i))
-    print("for x=1 and h= ",h, "fprime with the first method is: ", fprime(1,h))
 
-    print("for x=1 and h=",h, "fprime2 with the second method is: ", fprime2(1,h))
+    newh=format(h,'.20g')
+    print("for x=1 and h= ",newh, "fprime with the first method is: ", fprime(1,h))
+
+    print("for x=1 and h=",newh, "fprime2 with the second method is: ", fprime2(1,h))
     print()
     
 
