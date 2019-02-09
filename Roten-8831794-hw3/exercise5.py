@@ -1,36 +1,28 @@
 #!/usr/bin/env python3
 #
-# exercise5.py
-# 
-#
-"""
-Want 10000 random #s between 0 and 1 
-
-"""
+# Author: Jack Roten
+# Class: Phys 129L
+# Homework 3
+# Exercise 5
 #
 #
 # Jack Roten 06 Feb  19
 #-------------------------------------------------------
 
 
-from __future__ import division
-import scipy
-import random
 import matplotlib.pyplot as plt
 import numpy as np
-import math as m
+import random
+import matplotlib.mlab as mlab
 
 
-valuesX = []
-for ii in range(10000):
-    R = random.random()
-    valuesX.append(ii)
+np.random.seed(9112112)
+r=np.random.random(10000)
+x=(-1+np.sqrt(1+24*r))/4
 
-valuesY = []
-for jj in range(len(valuesX)):
-    Y = (1+4*valuesX[jj])/3
-    valuesY.append(jj)
+plt.hist(x, bins = 10, range = [0,1], normed=True)
 
+plt.show()
     
 #z = np.linspace(-10,10,1000)
 #y = 1/(m.pi*(1+z**2)) #Theoretical Cauchy
