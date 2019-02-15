@@ -15,7 +15,6 @@ import matplotlib.pyplot as plt
 
 df = pd.read_csv('CensusTownAndCityPopulation.csv')
 dateData = df["7_2009"] #gives value columns
-
 intMSDList = [] 
 for ii in range(len(dateData)):
     strData = str(dateData[ii]) #single out one value from column and casts value to string
