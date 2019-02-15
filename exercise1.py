@@ -32,7 +32,7 @@ def isInCircle(aList):
             inside =  False
         else:
             points = [x, y]
-            print (points)
+            #print (points)
             outside = True
             counter += 1
 
