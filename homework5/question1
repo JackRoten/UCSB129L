@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # homework2
-# -------------------------------------------
 
 import numpy as np
 import math
@@ -15,7 +14,7 @@ zMax = 2
 nMax = 255*2
 xmin, xmax = -1.6,1.6
 ymin, ymax = -1, 1
-xLength = xmax = xmin
+xLength = xmax - xmin
 yLength = ymax - ymin
 
 julia = np.zeros((horizontalSize,verticalSize))
@@ -36,15 +35,16 @@ for i in range(horizontalSize):
 		ratio = n / nMax
 		julia[i,j] = ratio
 		
+# creating figure/image
 fig, ax = plt.subplots()
-ax.imshow(julia, interpolation='nearest', cmap=cm.hot)
-# starting at tick zero
-xTick = np.linspace(xmin, xmax, xwidth / 0.5)
-ax.set_xticks([(x-xmin) / xLength * horizontalSize for x in xTick])
-ax.set_xticklabels(['{:.1f}'.format(xtick) for xtick in xTick])
-yTick = np.linspace(ymin, ymax, yLength/0.5)
-ax.set_yticks([(y-ymin) / yheight * verticalSize for y in yTick])
-ax.set_yticklabels(['{:.1f}'.format(ytick) for ytick in ytick_labels])
+ax.imshow(julia, interpolation='nearest', cmap=cm.viridis)
+# starting at tick zero z_0 point
+xTickLabel = np.linspace(xmin, xmax, xLength / 0.5)
+ax.set_xticks([(x-xmin) / xLength * horizontalSize for x in xTickLabel])
+ax.set_xticklabels(['{:.1f}'.format(xtick) for xtick in xTickLabel])
+yTickLabel = np.linspace(ymin, ymax, yLength/0.5)
+ax.set_yticks([(y-ymin) / yLength * verticalSize for y in yTickLabel])
+ax.set_yticklabels(['{:.1f}'.format(ytick) for ytick in yTickLabel])
 fig.show()
 
 input("Press <Enter> to exit")  # we are done
