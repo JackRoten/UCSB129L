@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+# homework 1
+# -----------------
+
+import scipy.integrate as integrate
+import scipy.special
+import numpy as np
+import math
+import matplotlib.pyplot as plt
+
+pi = math.pi
+a = 180
+k = math.sin(a/2)
+L = 20
+g = 9.8
+T_o = 2*pi*math.sqrt(L/g)
+# L is the length of the pendulum and g is gravity
+# a is the angle of the pendulum
+
+# declare function
+def t(B):
+	return (2/pi)*T_o/(math.sqrt(1 - k**2 * (math.sin(B))**2))
+
+	
+a = np.arange(1, 91, 5)
+res, err = integrate.quad(t,0,pi/2)
+print(a)
+
+# I don't know how to graph lol
+plt.plot(a, res/T_o)
+plt.show()
