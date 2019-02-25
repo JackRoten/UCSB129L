@@ -1,0 +1,18 @@
+try to get good at using the command line, and ditch file manager stuff!
+
+An advantage to this is the ability to use systems remotely, so not just your
+desktop. File Manager(what I am used to) will most likely be slower!
+
+If working on a server the file manager my not even exist!!
+
+
+
+Global variables are evil becuase they can mess with variables outside your
+functions! This is refering to scope.
+
+In C/C++ with a for/if block, that variable exists inside the block!
+Python does not have this function.
+
+
+
+
