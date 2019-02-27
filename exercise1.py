@@ -29,6 +29,25 @@ for i in arr:
     
 
 
+<<<<<<< HEAD
+def isInCircle(aList):
+    counter = 0
+    halfList = int(len(aList) / 2)
+    for i in range(0, halfList):
+        x = aList[i]
+        y = aList[i+1]
+        radius = 1
+        xSq = pow(x, 2)
+        ySq = pow(y, 2)
+        xSqPySq = xSq + ySq
+        if xSqPySq > radius:
+            inside =  False
+        else:
+            points = [x, y]
+            #print (points)
+            outside = True
+            counter += 1
+=======
     def isInCircle(aList):
         counter = 0
         halfList = int(len(aList) / 2)
@@ -64,6 +83,7 @@ for i in arr:
     
         #Use the factorial values with the Combination formula
         possibleCombos = theCountFactorial / (theNFactorial * theDifferenceFactorial)
+>>>>>>> b629d6cde82a79d00292376dc524d7c12ba73df8
 
 
 

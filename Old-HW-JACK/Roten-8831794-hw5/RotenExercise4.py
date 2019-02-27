@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+#
+# Jack Roten
+# PERM#  8831794
+# UCSB Physics 129L
+# Homework 4
+# Python -V = Python 3.7.1
+#
+# Homework 5, Exercise 4
+#
+# 16-bit total, bit 0 to 3 channel number, bit 4 to 7 time, bit 8 to 15 pulse height
+#
+#-------------------------------------------------------------------------------
+
+while True:
+	encode = int(input("Enter a number between 0 to 65,535 (16-bit): "))
+	if 0 < encode < 65536:
+		break
+	else:
+		print('Out of range')
+
+# converting to binary
+rawBinary = bin(encode)
+binary = rawBinary[2:]
+while len(binary) < 16:
+	binary = "0" + binary
+
+#print(binary)
+	
+# splitting string
+data = []
+#for i in range(0, len(binary), n):
+data.append((binary[0:4]))
+data.append((binary[4:8]))
+data.append((binary[8:16]))	
+#print(data)
+	
+# nested for loop to iterate through data and convert binary to decimal
+i = 0
+newData = []
+while i < len(data):
+	nibble = data[i]
+	decimal = int(nibble, 2)
+	newData.append(decimal)
+	i +=1
+
+print("Channel number: ", newData[0])
+print("Time: ", newData[1])
+print("Pulse Height: ", newData[2])
