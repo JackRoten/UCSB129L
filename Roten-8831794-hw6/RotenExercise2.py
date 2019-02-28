@@ -55,8 +55,17 @@ for x in xar:
     i      = i + 1
 
 # now the plot
+
+confPlus = mu+1.96*math.sqrt(mu/N)
+confMinus = mu-1.96*math.sqrt(mu/N)
+
+print(confPlus)
+print(confMinus)
+
 fig, ax = plt.subplots()
-ax.plot(xar, far)
+ax.plot(xar, far, color = 'r')
+plt.axvline(x = confPlus)
+plt.axvline(x = confMinus)
 ax.set_xlim(x1,x2)
 ax.set_ylim(0)ss
 ax.grid(True, which='both')
