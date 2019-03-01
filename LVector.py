@@ -127,7 +127,7 @@ class LVector:
         ans = math.sqrt(i)
         #x1axis = np.array([self.x1, 0, 0])
         x1axisMagn = math.sqrt(self.x1*self.x1)
-        shit = math.fmod(math.atan2(ans,x1axisMagn),2*math.pi)
+        shit = math.fmod(math.atan2(ans,x1axisMagn), math.pi)
         return shit
 
     def theta(self):
@@ -142,7 +142,7 @@ class LVector:
         ans = math.sqrt(i)
         #x3axis = np.array([self.x3, 0, 0])
         x3axisMagn = math.sqrt(self.x3*self.x3)
-        shit = math.fmod(math.atan2(ans,x3axisMagn),2*math.pi)
+        shit = math.fmod(math.atan2(ans,x3axisMagn),math.pi)
         return shit
 
     def eta(self):
@@ -151,7 +151,7 @@ class LVector:
     def Y(self):
         return 1
 
-    def boost(self, anListForBoost):
+    def boost(self, aListForBoost):
         gammaAr = []
         for aBeta in aListForBoost:
             gamma = 1/math.sqrt(1-aBeta*aBeta)
@@ -161,15 +161,18 @@ class LVector:
 
 
         #---------------------------
-        self.x0 = ct
-        newCt = gammaAr[] * (ct - aListForBoost[]*SOMETHING)
+        ct = self.x0
+        newCt = gammaAr[0] * (ct - aListForBoost[0]*self.x1)
 
         aRR = [self.x1, self.x2, self.x3]
-
+        j=0
+        newVals = [newCt]
         for val in aRR:
 
+            newVals.append(val + ((-gammaAr[j]*ct + (gammaAr[j]*gammaAr[j])/(1+gammaAr[j])*(aListForBoost[j])*val) * aListForBoost[j]))
 
-        return 
+
+        return newVals
 
         
 
