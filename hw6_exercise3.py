@@ -26,7 +26,6 @@ parser =  argparse.ArgumentParser(description="Get the required parameters")
 parser.add_argument('-N','--numberOfCounts', help='Enter the number(#) of counts as -N #', required=True, type=int)
 parser.add_argument('-u','--uncertainty', help='Enter the uncertainty as -u #', required=True, type=float)
 parser.add_argument('-m','--mean', help='Enter the mean as -m #', required=True, type=int)
-parser.add_argument('-n','--poissonianCounts', help='Enter the number(#) of counts for the Poissonian as -n #', required=True, type=int)
 # This is a dictionary containing the arguments
 args = vars(parser.parse_args())
 
@@ -34,7 +33,7 @@ args = vars(parser.parse_args())
 N = args['numberOfCounts'] 
 mu = args['uncertainty'] 
 sigma = args['mean'] 
-n = args['poissonianCounts']
+n = 10
 
 # The function that multiplies the Gaussian
 def ff(x,y,N):
@@ -66,8 +65,11 @@ for s in xar:
     	aPos1 = aPos[aPos < N] #aPos is an array of the counts
     	# fraction value of those which are n < N 
     	frac = len(aPos1)/len(aPos)
-    	anArray = [s, frac]
-    	sValsWFract.extend(anArray)       
+    	# an array with the s value j and the corresponding fraction value as j + 1
+    	#anArray = [s, frac]
+    	#sValsWFract.extend(anArray)
+    	sValsWFract.append(s)
+    	sValsWFract.append(frac)      
     ftoy   = ff(s, B, n)    
     far[i] = (1./thisN) * ftoy.sum()
     i      = i + 1
