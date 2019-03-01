@@ -1,62 +1,47 @@
-#!/usr/bin/env python 3
-#
-#Program creates a class to represent a 4-vector aka Lorentz vector
-#
-#CR 02/26/19
-#-----------------------------------------------------------------------------
-import numpy as np
 import math
+import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-#what i am doing is making a general layout for the class of lorentz vectors
-#so if you look at profs code you have to replace each of the components with self.inputvector[0,1,2,3]
-#define all of the vector addition/subtraction with a general definition using self.inputvector
-#I suck too much to try the boosts, so if you want to give that a shot add it back  in cause           # I took it out
+# Note: this makes use of some "magic methods"
+# to "overload" operators like "*" to define
+# the multiplication of a triangle by a number (!)
+# For a list of such possibilities, see
+# http://www.ironpythoninaction.com/magic-methods.html
 
-class LVector:
+class myTriangle:
     """
     Triangle class in 2D
     """
 
-    def __init__(self, inputvector):
-
-     
-        self.inputvector = np.array(inputvector, dtype=float) # in case we pass a list
-
+    def __init__(self, p0, p1, p2):
+        """
+        Initialize by passing the three points at the verteces.
+        Each point can be a 2-element np.array of (x,y) or a list.
+        We should probably protect against passing junk, but whatever.
+        We will store the points as np.array
+        """
+        self.p0 = np.array(p0, dtype=float) # in case we pass a list
+        self.p1 = np.array(p1, dtype=float) # in case we pass a list
+        self.p2 = np.array(p2, dtype=float) # in case we pass a list
 
     def copy(self):
         """
         make a copy
         """
-        return LVector(self.inputvector)
+        return myTriangle(self.p0, self.p1, self.p2)
 
     def __str__(self):
         """
         Nicely formatted print
         """
-        return " p0 = ({0}) \n p1 = ({1}) \n p2 = ({2}) \n p3=({3})".format(self.inputvector[0],self.inputvector[1],self.inputvector[2],self.inputvector[3])
+        return " p0 = ({0}) \n p1 = ({1}) \n p2 = ({2})".format(self.p0,self.p1,self.p2)
 
-    def add(self, other):
-        return LVector(self.inputvector+other.inputvector)
-
-    def subtract(self,other):
-        return LVector(self.inputvector+other.inputvector)
-
-    def scalar_multiplication(self,4):
-        return LVector(self.inputvector*4)
-
-    def square_of_vector:
-        return LVector(self.inputvector**2)
-
-    def length_of_3vector:
-        return LVector(self.inputvector[0]**2+self.inputvector[1]**2+self.inputvector[3]**2+self.inputvector[3]**2)
-
-    def component_of_3vector:
-        return LVector(sqrt(self.inputvector[0]**2+self.inputvector[1]**2))
-
-    def array_of_3components:
-        return np.array(self.inputvector[0],self.inputvector[1],self.inputvector[2])
+    def center(self):
+        """
+        return center of gravity of triangle
+        """
+        return (1./3.) * (self.p0+self.p1+self.p2)
 
     def side(self, i):
         """
@@ -68,11 +53,11 @@ class LVector:
         Should have better way of returning an error!!!!!
         """
         if i == 0:
-            length = math.sqrt( np.square(self.inputvector[0]-self.inputvector[1]).sum())
+            length = math.sqrt( np.square(self.p0-self.p1).sum())
         elif i == 1:
-            length = math.sqrt( np.square(self.inputvector[1]-self.inputvector[2]).sum())
+            length = math.sqrt( np.square(self.p1-self.p2).sum())
         elif i == 2:
-            length = math.sqrt( np.square(self.inputvector[2]-self.p).sum())
+            length = math.sqrt( np.square(self.p2-self.p0).sum())
         else:
             length = -9999
         return length
@@ -128,10 +113,41 @@ class LVector:
         We should probably protect against passing junk, but whatever.
         """
         w = np.array(v, dtype=float) # in case we pass a list
-        self.inputvector[0]=self.inputvector[0]+w
-        self.inputvector[1]=self.inputvector[1]+w
-        self.inputvector[2]=self.inputvector[2]+w
-        self.inputvector[3]=self.inputvector[3]+w
+        self.p0 = self.p0 + w
+        self.p1 = self.p1 + w
+        self.p2 = self.p2 + w
+
+    def rotate(self, angle):
+        """ 
+        rotate counterclockwise by some angle (units=radians)
+        around the center of gravity
+        """
+        center = self.center()
+        c = math.cos(angle)
+        s = math.sin(angle)
+        rotationMatrix = np.matrix([ [c,-s], [s,c] ])
+        self.translate(-center)
+        self.p0 = np.dot( rotationMatrix, self.p0)  # this is a matrix now
+        self.p1 = np.dot( rotationMatrix, self.p1)
+        self.p2 = np.dot( rotationMatrix, self.p2)
+        self.p0 = np.array(self.p0)[0]   # turn it back into an array
+        self.p1 = np.array(self.p1)[0]   # turn it back into an array
+        self.p2 = np.array(self.p2)[0]   # turn it back into an array
+        self.translate(center)
+
+    def __rmul__(self, scale):
+        """
+        return triangles resized by scale keeping center in same place
+        """
+        new = self.copy()
+        oldCenter = new.center()
+        # put p0 at the origin
+        new.translate(-new.p0)
+        new.p1 = scale * new.p1
+        new.p2 = scale * new.p2
+        newCenter = new.center()
+        new.translate(oldCenter-newCenter)
+        return new
 
     def draw(self, fig, ax):
         """
@@ -144,4 +160,7 @@ class LVector:
         ax.add_line(line1)
         ax.add_line(line2)
         fig.show()
+                            
+
+        
         
