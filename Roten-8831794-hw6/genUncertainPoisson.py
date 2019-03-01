@@ -24,8 +24,6 @@ parser.add_argument('-H', '--High', help='Maximum for plot', required=False, typ
 parser.add_argument('-s', '--seed', help='Random seed. Default=10', required=False, type=int, default=1)
 parser.add_argument('-o', '--obs',  help='Number of observed events', required=True, type=int)
 parser.add_argument('-u', '--unc',  help='Uncertanty on the mean', required=True, type=float)
-parser.add_argument('-sig', '--sigma',  help='sigma of ', required=True, type=float)
-
 # If you add "-g" to the command line, it will be True
 parser.add_argument('-g', '--gaus', help='Gaussian uncertainties Default=False',
                     action='store_true')
