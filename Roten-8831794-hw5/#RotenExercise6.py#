@@ -1,0 +1,33 @@
+#!/usr/bin/env python3
+#
+# Jack Roten
+# PERM#  8831794
+# UCSB Physics 129L
+# Homework 4
+# Python -V = Python 3.7.1
+#
+# Homework 5, Exercise 6
+#
+#
+#-------------------------------------------------------------------------------
+
+
+
+# Consider the differential equation given and it looks like we will be using
+# the Runge-Kutta method, this was a method suggested by others
+# find Runge-Kutta found online
+print("--------------------------------------------------
+script to calculate V_out of an RC Circuit
+using Runga-kutta method.")
+# Q: what is a transient?
+#
+#
+#
+#
+tau =input(print("enter value for tau (RC Time Constant:")
+time = 100 # microseconds
+           
+def V_in(time):
+# if t is between 0 and 1 and 
+    for i in range(len(time)):
+           if 
