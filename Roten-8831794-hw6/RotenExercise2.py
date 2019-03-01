@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# This is how you do the correct header!
+# 
 #
 # This is a plot of the function
 # f(x) = Integral [exp(-x-y) * (x+y)^N G(y | mu sigma) dy]
@@ -27,11 +27,12 @@ args=vars(parser.parse_args())
 
 # The function that multiplies the Gaussian
 def ff(x,y,N):
+
     return np.exp(-x-y) * (x+y)**N
 
 # parameters from problem
 N       = args['NNumber'] # i.e. 5
-mu      = args['muNumber'] # i.e. 3
+mu      = args['muNumber'] # i.e. 25
 sigma   = args['sigmaNumber'] # i.e. .5 
 x1      = -3.
 x2      = 15.
@@ -67,17 +68,17 @@ ax.plot(xar, far, color = 'r')
 plt.axvline(x = confPlus)
 plt.axvline(x = confMinus)
 ax.set_xlim(x1,x2)
-ax.set_ylim(0)ss
+ax.set_ylim(0)
 ax.grid(True, which='both')
 fig.show()
 input("press enter to continue")
 
 
 # [x] takes arguments for N, mu, and sigma
-# [] calculate 95% Baysean Confidence Level lower limit on S---
-# [] what is this?? 
+# [] calculate 95% Baysean Confidence Level lower limit on S--- what is this?? 
+#  What is the
 # [x] S>0 to limit pdf I think this already taken care of
-# [x] normalize properly??
+# [] normalize properly??
 # []What is the value of S for which you can say that all true values of S can
 # be excluded with at least 95% confidence? Make a not of your results for N=5
 # N=1 when mu=3 and sigma=0.5
