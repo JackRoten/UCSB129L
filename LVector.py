@@ -170,7 +170,7 @@ class LVector:
         for val in aRR:
 
             newVals.append(val + ((-gammaAr[j]*ct + (gammaAr[j]*gammaAr[j])/(1+gammaAr[j])*(aListForBoost[j])*val) * aListForBoost[j]))
-
+            j += 1
 
         return newVals
 
