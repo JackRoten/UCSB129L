@@ -55,14 +55,16 @@ for x in xar:
     far[i] = (1./thisN) * ftoy.sum()
     i      = i + 1
 
-# now the plot
 
-confPlus = mu+1.96*math.sqrt(mu/N)
-confMinus = mu-1.96*math.sqrt(mu/N)
+confPlus = mu+1.96*math.sqrt(mu/N) # this is the upper 95% confidence limit
+confMinus = mu-1.96*math.sqrt(mu/N) # this is the lower 95% confidence limit
 
-print(confPlus)
-print(confMinus)
+#Print out our confidence limits
+print("Upper 95% conifdence limit: ", confPlus)
+print("Lower 95% conifdence limit: ", confMinus)
 
+
+# Plots
 fig, ax = plt.subplots()
 ax.plot(xar, far, color = 'r')
 plt.axvline(x = confPlus)
@@ -75,11 +77,11 @@ input("press enter to continue")
 
 
 # [x] takes arguments for N, mu, and sigma
-# [] calculate 95% Baysean Confidence Level lower limit on S--- what is this?? 
+# [x] calculate 95% Baysean Confidence Level lower limit on S--- what is this?? 
 #  What is the
 # [x] S>0 to limit pdf I think this already taken care of
-# [] normalize properly??
-# []What is the value of S for which you can say that all true values of S can
+# [x] normalize properly?? Is normalized
+# [x]What is the value of S for which you can say that all true values of S can
 # be excluded with at least 95% confidence? Make a not of your results for N=5
 # N=1 when mu=3 and sigma=0.5
 
@@ -94,4 +96,3 @@ input("press enter to continue")
 # 95% confidence level = (mean) +/- 1.96*sigma(n-1)/sqrt(N)
 #
 # It would be nice to better understand why this is.
-#
