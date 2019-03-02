@@ -37,44 +37,36 @@ class LVector:
         """
         return " p0 = ({0}) \n p1 = ({1}) \n p2 = ({2}) \n p3=({3})".format(self.inputvector[0],self.inputvector[1],self.inputvector[2],self.inputvector[3])
 
-   def add(self, other):
-       return LVector(self.inputvector+other.inputvector)
+    def add(self, other):
+        return LVector(self.inputvector+other.inputvector)
 
-   def subtract(self,other):
-       return LVector(self.inputvector+other.inputvector)
+    def subtract(self,other):
+        return LVector(self.inputvector+other.inputvector)
 
-   def scalar_multiplication(self,4):
-       return LVector(self.inputvector*4)
+    def scalar_multiplication(self,inputvector):
+        return LVector(self.inputvector*4)
 
-   def square_of_vector:
-       return LVector(self.inputvector**2)
+    def square_of_vector(self,inputvector):
+        return LVector(self.inputvector**2)
 
-   def length_of_3vector:
-       return LVector(self.inputvector[0]**2+self.inputvector[1]**2+self.inputvector[3]**2+self.inputvector[3]**2)
+    def length_of_3vector(self,inputvector):
+        return LVector(self.inputvector[0]**2+self.inputvector[1]**2+self.inputvector[2]**2+self.inputvector[3]**2)
 
-   def component_of_3vector:
-       return LVector(sqrt(self.inputvector[0]**2+self.inputvector[1]**2))
+    def component_of_3vector(self,inputvector):
+        return LVector(sqrt(self.inputvector[0]**2+self.inputvector[1]**2))
 
-   def array_of_3components:
-       return np.array(self.inputvector[0],self.inputvector[1],self.inputvector[2])
+    def array_of_3components(self,inputvector):
+        return np.array(self.inputvector[0],self.inputvector[1],self.inputvector[2])
 
-   def phi_azimuthal_angle:
-
-       for i in range (0,2*pi):
-           #make a for loop for this phi to iterate over the range
+#    def phi_azimuthal_angle(self,inputvector):
+#
+#        for i in range (0,2*pi):
+#           #make a for loop for this phi to iterate over the range
            
 
-    def theta_polar_angle:
-        #make another for loop
+#    def theta_polar_angle(self,inputvector):
+#        #make another for loop
 
-        
-
-           
-
-   
-
-   
-   
 
     def side(self, i):
         """
