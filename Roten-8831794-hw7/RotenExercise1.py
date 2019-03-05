@@ -28,4 +28,71 @@
 # 
 #
 #
+
+
+import pandas as pd
+import scipy.optimize as sc
+import numpy as np
+import matplotlib.pyplot as plt
+
+# file is in working directory
+data = pd.read_csv("straightTracks.txt", sep=" ") 
+data.columns = ['X0','Y0','y00','y01','y02','y03','y10','y11','y12','y13','0']
+# Notice there is a '0' column this has no values and is irrelevnent to the
+# data but is needed becuase there is a space at the end of each line
+# so just don't use it for analyzing the data
+
+# Will now use histogram example and ccHist to create a swell histogram
 #
+
+#plt.hist(data['X0'], bins =100)
+#plt.title('X0')
+#plt.show()
+
+#plt.hist(data['y00'], bins =100)
+#plt.title('y00')
+#plt.show()
+
+#plt.hist(data['y01'], bins =100)
+#plt.title('y01')
+#plt.show()
+
+#plt.hist(data['y02'], bins =100)
+#plt.title('y02')
+#plt.show()
+
+#plt.hist(data['y03'], bins =100)
+#plt.title('y03')
+#plt.show()
+
+#plt.hist(data['y10'], bins =100)
+#plt.title('y10')
+#plt.show()
+
+#plt.hist(data['y11'], bins =100)
+#plt.title('y11')
+#plt.show()
+
+#plt.hist(data['y12'], bins =100)
+#plt.title('y12')
+#plt.show()
+
+plt.hist(data['y13'], bins =50)
+plt.title('y13')
+plt.show()
+
+# there are two tracks: a track 1 and a track 2
+# these tracks will pass through four detectors
+# We want to find the x corrdinate of the decay for a given pair of tracks
+
+# will refer to tracks as yij, where the i component is the track number,
+# here we have 0 and 1, so two tracks!!
+# Next we will refer to j as the detector,
+
+# So we should see a different distribution of signal for each combination
+# I would think the track is diverging away from the origin in a linear fashion
+# so we need to find that fashion?
+# Are we going to look at the given distribution of data and estimate where the
+# tracks are going? It seems that this would make some sense.
+# But also at the same time this seems stupid... We'll he always gives up dumb
+# problems. 
