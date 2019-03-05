@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 #
-# Jack Roten
-# PERM#  8831794
-# UCSB Physics 129L
-# Homework 6
-# Python -V = Python 3.7.1
+# 
 #
-# Exercise 2
+# This is a plot of the function
+# f(x) = Integral [exp(-x-y) * (x+y)^N G(y | mu sigma) dy]
+# where G is a Gaussian for y of mean=mu and std dev=sigma
+# with y>0
 #
-#-------------------------------------------------------------------------------
-
+# It is plotted betwee x1 and x2
+#
+#
 
 import argparse
 import math
