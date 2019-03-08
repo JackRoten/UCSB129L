@@ -14,8 +14,13 @@ import numpy as np
 # np.array or a list...both are allowed
 p = [ 20., 1., 2., 3. ]
 q = np.array( [40., 2., 4., 9.] )
-a = lv.LVector(p)
-b = lv.LVector(q)
+#a = lv.LVector(p)
+#b = lv.LVector(q)
+
+a = lv.LVector(p[0], p[1], p[2], p[3])
+
+b = lv.LVector(q[0], q[1], q[2], q[3])
+
 
 # There should be a nicely implemented print method
 print(a)
