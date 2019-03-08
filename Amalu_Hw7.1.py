@@ -30,22 +30,6 @@ All lengths in cm
 '''
 with open('straightTracks.txt', 'r') as f:
 	data = [line.split() for line in f]
-
-'''x = [float(data[0][0]), 2.,3.,5.,7.]
-y = [float(data[0][1]), float(data[0][2]), float(data[0][3]), float(data[0][4]), float(data[0][5])]
-m, b = np.polyfit(x,y,1)
-print("m= ", m,"b= ", b)
-xInter = -b/m
-print("X intercept", xInter)
-x1x0 = abs(float(data[0][0]) - xInter)
-print("Error difference", x1x0)
-
-# plotting
-xp = np.linspace(-5., 10., 100)
-y1 = m*xp + b
-plt.plot(xp, y1, '-r', label='y=mx+b')
-plt.scatter(x,y)
-plt.show()'''
 	
 # calculating the curve fit/linear regression
 i = 0
@@ -56,17 +40,16 @@ while i < len(data):
 	y_0 = [float(data[i][1]), float(data[i][2]), float(data[i][3]), float(data[i][4]), float(data[i][5])]
 	m0, b0 = np.polyfit(x,y_0,1)
 	xInter0 = -b0/m0
-	x1x0.append(abs(float(data[i][0]) - xInter0))
+	x1x0.append(float(data[i][0]) - xInter0)
 	# for track 1
 	y_1 = [float(data[i][1]), float(data[i][6]), float(data[i][7]), float(data[i][8]), float(data[i][9])]
 	m1, b1 = np.polyfit(x,y_1,1)
 	xInter1 = -b1/m1
-	x2x0.append(abs(float(data[i][0]) - xInter1))
+	x2x0.append(float(data[i][0]) - xInter1)
+	# X average for X0 and X1
 	xAvg.append((xInter0 + xInter1)/2)
 	
 	i += 1
-	
-#print(xAvg)
 
 # calculate X average
 i=0
@@ -74,13 +57,6 @@ while i < len(xAvg):
 	XavXo.append(float(xAvg[i]) - float(data[i][0]))
 	i += 1
 	
-#print(XavXo)
-	
-#generate historgram
-#plt.hist(x1x0, bins=100, range=(-500*(10**-6), 500*(10**-6)))
-#plt.hist(x2x1, bins=100, range=(-500*(10**-6), 500*(10**-6)))
-#plt.xlabel("x values")
-#cc.statBox(
 print(np.mean(x1x0))
 seed = 12345
 np.random.seed(seed)
@@ -117,3 +93,4 @@ input("Press any key to continue")
 
 #print(data[999])
 #print(len(data))
+
