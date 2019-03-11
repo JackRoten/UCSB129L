@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
-# Amalu Shimamura
-# Physics 129L HW7 Question1
 #
-# calculate the error for an ideal X0 from a track and get a histogram
-# -------------------------------
+# Jack Roten
+# PERM#  8831794
+# UCSB Physics 129L
+# Homework 7
+# Python -V = Python 3.7.1
+#
+# Exercise 1
+#
+#-------------------------------------------------------------------------------
+
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -30,22 +36,6 @@ All lengths in cm
 '''
 with open('straightTracks.txt', 'r') as f:
 	data = [line.split() for line in f]
-
-'''x = [float(data[0][0]), 2.,3.,5.,7.]
-y = [float(data[0][1]), float(data[0][2]), float(data[0][3]), float(data[0][4]), float(data[0][5])]
-m, b = np.polyfit(x,y,1)
-print("m= ", m,"b= ", b)
-xInter = -b/m
-print("X intercept", xInter)
-x1x0 = abs(float(data[0][0]) - xInter)
-print("Error difference", x1x0)
-
-# plotting
-xp = np.linspace(-5., 10., 100)
-y1 = m*xp + b
-plt.plot(xp, y1, '-r', label='y=mx+b')
-plt.scatter(x,y)
-plt.show()'''
 	
 # calculating the curve fit/linear regression
 i = 0
@@ -64,42 +54,7 @@ while i < len(data):
 	x2x0.append(abs(float(data[i][0]) - xInter1))
 	xAvg.append((xInter0 + xInter1)/2)
 	
-	i += 1with open('straightTracks.txt', 'r') as f:
-	data = [line.split() for line in f]
-
-
-x = [float(data[0][0]), 2.,3.,5.,7.]
-y = [float(data[0][1]), float(data[0][2]), float(data[0][3]), float(data[0][4]), float(data[0][5])]
-m, b = np.polyfit(x,y,1)
-print("m= ", m,"b= ", b)
-xInter = -b/m
-print("X intercept", xInter)
-x1x0 = abs(float(data[0][0]) - xInter)
-print("Error difference", x1x0)
-
-# plotting
-xp = np.linspace(-5., 10., 100)
-y1 = m*xp + b
-plt.plot(xp, y1, '-r', label='y=mx+b')
-plt.scatter(x,y)
-plt.show()
-
-x = [float(data[0][0]), 2.,3.,5.,7.]
-y = [float(data[0][1]), float(data[0][2]), float(data[0][3]), float(data[0][4]), float(data[0][5])]
-m, b = np.polyfit(x,y,1)
-print("m= ", m,"b= ", b)
-xInter = -b/m
-print("X intercept", xInter)
-x1x0 = abs(float(data[0][0]) - xInter)
-print("Error difference", x1x0)
-
-# plotting
-xp = np.linspace(-5., 10., 100)
-y1 = m*xp + b
-plt.plot(xp, y1, '-r', label='y=mx+b')
-plt.scatter(x,y)
-plt.show()
-
+	i += 1
 	
 #print(xAvg)
 
@@ -109,15 +64,10 @@ while i < len(xAvg):
 	XavXo.append(float(xAvg[i]) - float(data[i][0]))
 	i += 1
 	
-#print(XavXo)
 	
 #generate historgram
-#plt.hist(x1x0, bins=100, range=(-500*(10**-6), 500*(10**-6)))
-#plt.hist(x2x1, bins=100, range=(-500*(10**-6), 500*(10**-6)))
-#plt.xlabel("x values")
-#cc.statBox(
 
-print(np.mean(x1x0))
+print('the mean of X1 and X2 = ', np.mean(x1x0))
 seed = 12345
 np.random.seed(seed)
 fig, ax = plt.subplots()
@@ -136,7 +86,6 @@ ax.tick_params("both", direction='in', length=7, right=True, which='minor')
 ax.set_title("X1-X0 and X2-X0")
 fig.show()
 
-
 # plotting x average
 fig3, ax3 = plt.subplots()
 c3, bE3, _ = ax3.hist(XavXo, np.linspace(-0.05,0.05), histtype='step', log=False, color='orange', label='Xav-X0')
@@ -151,4 +100,3 @@ ax3.set_title("Xaverage - X0")
 fig3.show()
 
 input("Press any key to continue")
-
