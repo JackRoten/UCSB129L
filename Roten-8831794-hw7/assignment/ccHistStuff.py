@@ -18,8 +18,8 @@ def statBox(ax, entries, binEdges, x=0.96, y=0.98, fontsize='medium'):
     en = len(entries)                   # number of entries
     ov = (entries>binEdges[-1]).sum()   # overflows
     uf = (entries<binEdges[0]).sum()    # underflows
-    mn = entries.mean()                 # mean
-    sd = entries.std()                  # standard deviation
+    mn = np.mean(entries)                 # mean
+    sd = np.std(entries)                  # standard deviation
     textstr = 'N=%i \nOverflow=%i \nUnderflow=%i \n$\mu=%.2f$ \n$\sigma=%.2f$' % (en, ov, uf, mn, sd)
     props = dict(boxstyle='round', facecolor='white', alpha=0.5)
     ax.text(x, y, textstr,

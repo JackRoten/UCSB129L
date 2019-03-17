@@ -1,0 +1,105 @@
+#!/usr/bin/env python3
+#
+#
+# Jack Roten
+# PERM#  8831794
+# UCSB Physics 129L
+# Homework 7
+# Python -V = Python 3.7.1
+#
+# Exercise 3
+#
+#Program takes two particle trajectories and fits them as a single linear trajectory to calculate the x origin value/ y intercept.  Chi squared fitting method with 3 parameters is used.
+#
+#-------------------------------------------------------------------------------
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+import ccHistStuff as cc
+
+tracks = np.loadtxt("straightTracks.txt")
+
+#Empty lists for Histogram plotting
+x0 = []
+xf = []
+xerr = np.full(25, np.sqrt(1/6))
+
+#We can create a function of  3 parameters simply by adding the functions for the 2 lines as according to our fit, they share a common origin point
+#Define linear function and partial derivative
+def func(p, x):
+	return p[0]+p[1]*x
+
+
+def dfdp(i, x):
+	if i == 0:
+		return 2
+	elif i == 1 or i == 2:
+		return x
+
+#Defining positions of detectors:
+xdet = np.array([2, 3, 5, 7])
+
+#Define errors
+e2 = np.full(4, 1/12)
+W = np.diag(1/e2)
+
+#Matrix operations to test our chi square fit
+for track in tracks:
+	x0.append(track[0])
+	y1 = []
+	y2 = []
+	
+	for i in range(2, 6):
+		y1.append(track[i])
+		y2.append(track[i+4])
+	p = [1,2,3]
+#We iterate over 2 functions which share a common parameter and one unique parameter each, 3 parameters total.
+	for i in range(0, 5):
+		y0 = func((p[0],p[1]),xdet)
+		y00 = func((p[0],p[2]),xdet)
+		At = np.array( [np.full(4, 2), dfdp(1, xdet)] ) 
+		A = (At.T).copy()
+		dy = (np.array( [(y1-y0),] )).T
+		dyy = (np.array([(y2-y00),] )).T
+		temp = np.matmul(At, W)
+		temp2 = np.matmul(temp, A)
+		temp3 = np.linalg.inv(temp2)
+		temp4 = np.matmul(temp3, At)
+		temp5 = np.matmul(temp4, W)
+		dpar = np.matmul(temp5, dy)
+		p[0] = p[0] + dpar[0]
+		p[1] = p[1] + dpar[1]
+		#Both functions of p1 and p2 share identical partial derivative functions as well as the same covariance matrix.  Thus the C matrix for both is the same.
+		y0 = func((p[0], p[1]),xdet)
+		dparr = np.matmul(temp5, dyy)
+		p[0] = p[0] + dparr[0]
+		p[2] = p[2] + dparr[1]
+		
+		
+	xf.append(float(p[0]))
+
+#Converting lists to np arrays to prevent conflicts between np arrays and non np arrays
+xf = np.array(xf)
+x0 = np.array(x0)
+#Calculate differences between calculated x coordinate and actual x coordinate
+xdif = xf-x0
+xpul = xdif/np.sqrt(1/6)
+
+#Histogram plotting time
+low = -0.05
+high = 0.05
+nbins = 100
+bins = np.linspace(low, high, nbins+1)
+
+fig, ax = plt.subplots()
+contents, binEdges, _ = ax.hist(xdif, bins, histtype= 'step', log =  False, color = 'blue', label = 'Xf-X0')
+ax.set_ylim(0, 1.4*np.max(contents))
+contents, binEdges, _ = ax.hist(xpul, bins, histtype= 'step', log =  False, color = 'red', label = 'X pull')
+ax.set_xlim(binEdges[0], binEdges[-1])
+ax.tick_params('both', direction = 'in', length = 10, right = True)
+ax.set_xlabel("difference in x coords (cm)")
+ax.legend()
+fig.show()
+
+input('press enter to exit')
