@@ -51,14 +51,20 @@ a1.tick_params("both", direction='in', length=7, right=True, which='minor')
 # adding on begins here
 
 # i think my functions needs to be fixed - Amalu
-#x_values=np.linspace(-3, 310, 1000)
-x = bins
-def b_pdf(slope, b):
-	return -slope*x + b
-	
-def s_pdf(x):
-	return np.exp(-np.power(x - 155, 2.) / (2 * np.power(5, 2.))) 
+# ------ SOMEONE HELP BELOW
 
+#background pdf
+def b_pdf(slope, b):
+# this should return a numpy array not just the equation
+	return -(slope)*x + b
+	
+# signal pdf
+def s_pdf(x):
+# thsi should return a numpy array not just the equation
+	return np.exp(-np.power(x - 155, 2.) / (2 * np.power(5, 2.)))
+
+
+# help aboveeeeee ---------------------------
 
 #def y(x):
 #1/500
