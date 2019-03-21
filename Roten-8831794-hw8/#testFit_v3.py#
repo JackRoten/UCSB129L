@@ -15,6 +15,7 @@ from iminuit import Minuit
 
 # Minuit needs to define a function to minimize
 # explicitely...it does not need to be a chisquared
+# it can be something else!! i.e. NLL
 def myChi2(slope, offset):
     global x
     global y
