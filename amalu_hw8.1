@@ -1,0 +1,169 @@
+#!/usr/bin/env python3
+# Amalu Shimamura
+# Physics 129L
+# Homework 8
+# Exercise 1
+#
+# ----------------------------------------------
+
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import special
+import ccHistStuff as cc
+from iminuit import Minuit
+from scipy.stats import norm
+from scipy.stats import powerlaw
+# pip install powerlaw
+#import powerlaw
+
+#homework5 question 3 stuff below
+
+# Read the masses into an array 
+mass = np.loadtxt("mass.txt")
+
+# How many do we have, what is the max and min
+#    print( len(mass) )
+#    m1 = np.amax(mass)
+#    m2 = np.amin(mass)
+#    print(m1,m2)
+# From te tests above, looks like 200 entries
+# between 100 and 200?
+# A reasonable binning may be 20 bisn
+x1 = 100.
+x2 = 200.
+nb = 20
+bins = np.linspace(x1, x2, nb+1)
+#print("bins", bins)
+
+# plot now
+f1, a1 = plt.subplots()
+# c = y coordinate, b = x coordinate
+c, b, _ = a1.hist(mass, bins, histtype='step')
+cc.statBox(a1, mass, b)
+a1.set_xlim(b[0], b[-1])
+a1.tick_params("both", direction='in', length=10, right=True)
+a1.set_xticks(b, minor=True)
+a1.tick_params("both", direction='in', length=7, right=True, which='minor')
+
+#input("Carriage return to continue....")
+
+# adding on begins here
+
+# i think my functions needs to be fixed - Amalu
+
+x = bins
+# background pdf
+b_pdf = np.array()
+def bees_pdf(slope, b):
+# this should return a numpy array not just the equation
+	-(slope)*x + b
+	return b_pdf
+	
+# signal pdf
+s_pdf = np.array()
+def sees_pdf(x):
+# thsi should return a numpy array not just the equation
+	return np.exp(-np.power(x - 155, 2.) / (2 * np.power(5, 2.))) 
+
+
+# help aboveeeeee ---------------------------
+
+#def y(x):
+#1/500
+#m = 1./500.
+#	return -slope*x + offset + np.exp(-np.power(x - 155, 2.) / (2 * np.power(5, 2.)))
+#plt.plot(bins, y(bins))
+#plt.show()
+
+# graph plot it and call in the NLL function
+# define a Negative  Log-Likelihood (NLL)
+# b is the bins from the mass.txt histogram
+def NLL(S, B, slope, b):
+	# tweakers: slope, b
+	# adjust starting coordinate
+	if b > c[0]:
+		newb_pdf = b_pdf(slope, b+1)
+	else:
+		newb_pdf = b_pdf(slope, b-1)
+	# adjust slope, avearge slope from mass histogram is roughly 0.13~.14
+	if slope > 0.13:
+		newSlope = slope + 5.
+	else:
+		newSlope = slope - 5.
+
+	newb_pdf = newb_pdf / newb_pdf.sum()
+	#newSlope = newSlope / newSlope.sum()
+	temp = c * np.log(S*s_pdf + B*newb_pdf)
+	return S + B - temp.sum()
+
+
+# slope s = 0.14
+# call in minuit
+m = Minuit(NLL, S=10., B=500., slope=0.16, b=20, print_level=1, errordef=0.5, error_S=1.0, error_B=1.0, error_slope=0.1, error_b=0.1)
+
+# Run the fitter
+m.migrad()
+m.minos()
+m.print_param()
+
+# Profile scan of the fitted function (NLL).
+# At each FIXED value of S, fit again for B,
+# extract the NLL at the minimum, subtract 
+# the NLL at the GLOBAL minimum, and plot it
+xxx, yyy, _ = m.mnprofile('S', subtract_min=True, bins=100, bound=(0,60))
+
+# m.mnprofile does all the work... 
+# Now we just plot the results
+# deltaNLL = 0.5 (2, 4.5 ) corresponds to 1 (2, 3) sigma
+fig3, ax3 = plt.subplots()
+ax3.plot(xxx,yyy,linestyle='solid', color='b')
+ax3.set_xlim(min(xxx), max(xxx))
+ax3.set_ylim(0.)
+ax3.set_xlabel('S')
+ax3.set_ylabel('deltaNLL')
+ax3.plot([min(xxx), max(xxx)], [0.5, 0.5], linestyle='dashed', color='red')
+ax3.plot([min(xxx), max(xxx)], [2.0, 2.0], linestyle='dashed', color='red')
+ax3.plot([min(xxx), max(xxx)], [4.5, 4.5], linestyle='dashed', color='red')
+fig3.show()
+
+# Show the data...first get fit parameters
+fittedB = m.values['B']
+fittedS = m.values['S']
+fittedslope = m.values['slope']
+fitted_b = m.values['b']
+'''if fittedslope>0:
+    bf_pdf = b_pdf + fittedslope*(b1_pdf-b_pdf)
+else:
+    bf_pdf = b_pdf - fittedslope*(b2_pdf-b_pdf)
+bf_pdf = bf_pdf / bf_pdf.sum()'''
+
+
+if fitted_b > 0:
+	bf_pdf = b_pdf(s, b+1)
+else:
+	bf_pdf = b_pdf(s, b-1)
+	
+if fittedslope > 0.13:
+	fslope = newSlope + 5.
+else:
+	fslope = newSlope - 5.
+		
+# Then plot stacked histograms of S and B
+# lists with the data, colors, and labels of the two hist 
+blah   = [binCen, binCen]
+colors = ['blue', 'red']
+names  = ['Background', 'Signal']
+w2     = [fittedB*bf_pdf, fittedS*s_pdf]
+
+fig42, ax42 = plt.subplots()
+ax42.hist(blah, binEdges, histtype='stepfilled', log=True,
+          color=colors, stacked='True', label=names, weights=w2, alpha=0.4)
+ax42.errorbar(binCen, d, yerr=np.sqrt(d), linestyle='none', marker='o', 
+              color='black', markersize=4)
+ax42.set_ylim(0.1)
+ax42.set_xlim(binEdges[0], binEdges[-1])
+ax42.legend()
+ax42.set_ylabel("Number of events")
+fig42.show()
+input('Enter something to quit')
