@@ -1,0 +1,55 @@
+#### Run instructions ####
+
+Jack Roten
+PERM# 8831794
+UCSB Physiscs 129L
+Homework 7
+Python -V = Python 3.7.1
+
+Collaborators: Amalu Shimaura, Crystal Roybal, Rosio Reyes, Paul Park, Andrew Andrus
+
+
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+
+Exercise 1
+----------
+# Uses
+
+import math
+import scipy.stats as stats
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import special
+import ccHistStuff as cc
+from iminuit import Minuit
+
+
+BASH input:
+$ ./RotenExercise1.py
+
+
+--------------------------------------------------------------------------------
+
+Exercise 2
+----------
+
+from math import sqrt
+import LVector as lv
+import numpy as np
+BASH input:
+
+$ ./RotenExercise2.py
+
+--> I was unable to finish this last problem as too much time was taken on learning the concepts and implementation of problem 1. After learning the basics of finding the values for a momentum four vector I calculated these based on the reference: http://www.phys.ufl.edu/~avery/course/4390/f2015/lectures/relativistic_kinematics_2.pdf .
+
+--> Next steps I would take:
+1. find energies and momenta for the other decay sequences
+2. understand how to rotate vectors with given class methods then implement this
+3. understand how to boost vectors with given class methods then implement this
+4. understand how to iterate this process for random, statistically determined values based off of different distributions, which relate to a sphere.
+5. check that this all comforms to the checkDecayChain.py program and prints oout graphs that look simplar to what is expected.
+
+--------------------------------------------------------------------------------
